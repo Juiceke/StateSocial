@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<head>
+<!--    <meta charset="ISO-8859-1">-->
+<!--    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">-->
+    <title>States</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/main.css">
+</head>
+<body>
+<div class="header" id="stateHeader">
+    <a class="link" href="/"><h2>StateSocial</h2></a>
+</div>
+<div class="content" id="pageContent">
+<!--    <h1 th:text="${user.visitorId}"></h1>-->
+<!--    <tr th:each="post : ${user.posts}">-->
+<!--        <td th:text="${post.postTitle}">1</td>-->
+        <!--        <td><a href="#" th:text="${message.title}">Title ...</a></td>-->
+        <!--        <td th:text="${message.text}">Text ...</td>-->
+<!--    </tr>-->
+
+    <div th:if="${notice}" class="flash-message">
+        <h3>[[${notice}]]</h3>
+    </div>
+    <form action="login" method="POST" th:action="@{/users}" th:object="${user}"  class="signup-form" >
+        <div>
+            <label for="userName_sign">username:</label>
+            <input type="text" id="userName_sign" th:field="*{userName}"/>
+        </div>
+        <div>
+            <label for="email_sign">email:</label>
+            <input type="text" id="email_sign"  th:field="*{email}"/>
+        </div>
+        <div>
+            <label for="password_sign">password:</label>
+            <input type="password" id="password_sign" th:field="*{password}"/>
+        </div>
+        <div>
+            <button type="submit">signup</button>
+        </div>
+    </form>
+
+    <form action="login" method="POST" th:action="@{/users/login}" th:object="${user}"  class="signup-form" >
+        <div>
+            <label for="email_login">email:</label>
+            <input type="text" id="email_login"  th:field="*{email}"/>
+        </div>
+        <div>
+            <label for="password_login">password:</label>
+            <input type="password" id="password_login" th:field="*{password}"/>
+        </div>
+        <div>
+            <button type="submit">signup</button>
+        </div>
+    </form>
+<!--    <p th:text="${notice} ?: 'IDK'"></p>-->
+</div>
+
+</body>
+<script src="/js/login_page.js"></script>
+</html>

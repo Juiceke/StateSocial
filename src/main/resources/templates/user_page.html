@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>States</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/main.css">
+</head>
+<body>
+<div class="header" id="stateHeader">
+    <h2>HEAD</h2>
+</div>
+<div class="content" id="pageContent">
+    <h1 th:text="${user.visitorId}"></h1>
+    <tr th:each="post : ${user.posts}">
+        <td th:text="${post.postTitle}">1</td>
+<!--        <td><a href="#" th:text="${message.title}">Title ...</a></td>-->
+<!--        <td th:text="${message.text}">Text ...</td>-->
+    </tr>
+
+    <h1>${User.userName}</h1>
+</div>
+
+</body>
+<script src="/js/user_page.js"></script>
+</html>
