@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>States</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style/main.css">
+    <!--    <link rel="stylesheet" href="../static/style/main.css">-->
+</head>
+<body>
+<div class="header" id="stateHeader">
+    <nav>
+        <h2>HEAD</h2>
+        <form>
+            <select class="form" id="test" name="stateSelect" onchange="test()">
+                <option value="">Select state</option>
+                <option th:each="state: ${states}"
+                    th:value="${state.stateId}"
+                    th:text="${state.stateName}"></option>
+            </select>
+        </form>
+    </nav>
+    <div th:if="${loggedIn}">
+        <a th:href="@{/users/logout}" class="btn">logout</a>
+    </div>
+    <div th:unless="${loggedIn}">
+        <a th:href="@{/login}" class="btn">login</a>
+    </div>
+
+</div>
+<div class="content" id="pageContent">
+    <form method="POST" th:action="@{/posts/api}" class="signup-form" >
+        <div>
+        <div>
+            <label for="userName_sign">Post Title:</label>
+            <input type="text" id="userName_sign" th:value="${post.postTitle}" name="postTitle"/>
+        </div>
+        <div>
+            <label for="email_sign">Post Body:</label>
+            <input type="text" id="email_sign"  th:field="${post.postBody}" name="postBody"/>
+        </div>
+        <div>
+            <label for="password_sign">State:</label>
+            <input type="text" id="password_sign" th:field="${state.stateId}" th:name="stateId"/>
+        </div>
+        <div>
+            <input th:field="${user.visitorId}"/>
+            <button type="submit">Post</button>
+        </div>
+        </div>
+        <div>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+</div>
+
+</body>
+<script src="/js/landing_page.js"></script>
+<!--<script src="../static/js/landing_page.js"></script>-->
+</html>

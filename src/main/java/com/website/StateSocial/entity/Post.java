@@ -43,9 +43,9 @@ public class Post implements Serializable {
 //    @JsonView(View.Internal.class)
 //    @Column(insertable=false, updatable=false)
 //    private Long visitorId;
-    @ManyToOne
-//    @JoinColumn(name = "visitorId", referencedColumnName = "visitor_id")
-    @JsonIgnoreProperties({"posts", "likedPosts", "password", "email", "visitorId"})
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "visitorId", referencedColumnName = "visitor_id", nullable = false)
+    @JsonIgnoreProperties({"posts", "likedPosts", "password", "email"})
     private User userPosted;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)

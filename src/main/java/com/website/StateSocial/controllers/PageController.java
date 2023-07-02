@@ -1,5 +1,6 @@
 package com.website.StateSocial.controllers;
 
+import com.website.StateSocial.entity.Post;
 import com.website.StateSocial.entity.User;
 import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,7 +52,6 @@ public class PageController {
         return pin;
     }
 
-    //    please move this later
     @PostMapping("/users")
     public String createUser(@ModelAttribute User user, Model model, HttpServletRequest request) throws Exception {
 //        stateService.saveUser(userRequest);

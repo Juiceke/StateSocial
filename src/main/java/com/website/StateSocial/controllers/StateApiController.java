@@ -10,6 +10,7 @@ import com.website.StateSocial.service.StateService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,11 +39,12 @@ public class StateApiController {
         return stateService.getStateById(stateId);
     }
 
-    @PostMapping("/posts/{stateId}/{visitorId}/api")
-    public State createPost(@PathVariable(value = "stateId") Long stateId, @PathVariable(value = "visitorId")
-    Long visitorId,@RequestBody Post postRequest) {
-        State state = stateService.getStateById(stateId);
-        User user = stateService.getUserById(visitorId);
+//    very strange, but works!
+    @PostMapping("/posts/api")
+    public State createPost(@ModelAttribute Post postRequest, @ModelAttribute User userRequest, @ModelAttribute State stateRequest) {
+
+        State state = stateService.getStateById(stateRequest.getStateId());
+        User user = stateService.getUserById(userRequest.getVisitorId());
         postRequest.setStateName(state.getStateName());
         postRequest.setState(state);
         postRequest.setVisitorName(user.getUserName());
@@ -52,7 +54,7 @@ public class StateApiController {
 //        postRequest.setVisitor(user);
 
         stateService.savePost(postRequest);
-        return stateService.getStateById(stateId);
+        return stateService.getStateById(postRequest.getState().getStateId());
     }
 
     @PostMapping("/posts/{visitorId}/{postId}/like/api")

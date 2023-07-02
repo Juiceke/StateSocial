@@ -16,11 +16,11 @@
             <option value="">Select state</option>
             <option th:each="state: ${states}"
                 th:value="${state.stateId}"
-                th:text="${state.stateName}"></option>
+                th:text="${user.visitorId}"></option>
         </select>
     </nav>
-    <<div th:if="${loggedIn}">
-    <a th:href="@{/users/logout}">logout</a>
+    <div th:if="${loggedIn}">
+    <a class="" th:href="@{/users/logout}">logout</a>
 </div>
     <div th:unless="${loggedIn}">
         <a th:href="@{/login}">login</a>

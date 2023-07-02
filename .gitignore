@@ -4,7 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .DevLog.txt
-/src/main/resources/env.properties
 /src/main/resources/application.properties
 
 ### STS ###

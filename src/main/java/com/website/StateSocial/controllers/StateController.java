@@ -1,5 +1,7 @@
 package com.website.StateSocial.controllers;
 
+import com.website.StateSocial.entity.Post;
+import com.website.StateSocial.entity.State;
 import com.website.StateSocial.entity.User;
 import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
@@ -8,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class StateController {
@@ -24,14 +30,12 @@ public class StateController {
         this.stateService = stateService;
     }
 
-    @GetMapping("/")
-    public String landingPage(Model model, HttpServletRequest request) {
-        model.addAttribute("states", stateService.getAllStates());
-
+    public void getSessionUser(Model model, HttpServletRequest request) {
         User sessionUser = new User();
 
         if (request.getSession(false) != null) {
             sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+            model.addAttribute("user", sessionUser);
 //            System.out.println(request.getSession().getAttribute("SESSION_USER"));
             model.addAttribute("loggedIn", sessionUser.isLoggedIn());
         } else {
@@ -39,6 +43,49 @@ public class StateController {
         }
 
         model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+    }
+
+    @GetMapping("/create")
+    public String createPost(@ModelAttribute Post post, Model model, @ModelAttribute State state, HttpServletRequest request) {
+        model.addAttribute("states", stateService.getAllStates());
+        User sessionUser = new User();
+
+        if (request.getSession(false) != null) {
+            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+//            System.out.println(request.getSession().getAttribute("SESSION_USER"));
+            model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+            model.addAttribute("user", sessionUser);
+        } else {
+            model.addAttribute("loggedIn", false);
+            return "redirect:/login";
+        }
+
+//        getSessionUser(model, request);
+
+//        if(model.getAttribute("loggedIn").equals(false)) {
+//            return "redirect:/login";
+//        }
+
+        return "create_post";
+    }
+
+    @GetMapping("/")
+    public String landingPage(Model model, HttpServletRequest request) {
+        model.addAttribute("states", stateService.getAllStates());
+
+        getSessionUser(model, request);
+
+//        User sessionUser = new User();
+//
+//        if (request.getSession(false) != null) {
+//            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+////            System.out.println(request.getSession().getAttribute("SESSION_USER"));
+//            model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+//        } else {
+//            model.addAttribute("loggedIn", false);
+//        }
+
+//        model.addAttribute("loggedIn", sessionUser.isLoggedIn());
         return "landing_page";
     }
 
