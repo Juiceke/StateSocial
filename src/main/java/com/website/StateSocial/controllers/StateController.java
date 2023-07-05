@@ -121,22 +121,43 @@ public class StateController {
 //        return stateService.getStateById(state_id).getStateId();
 //    }
 
-    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, headers = {})
-    public @ResponseBody String likePost(@RequestParam Long postId, @RequestParam Long visitorId, @ModelAttribute State state){
-        System.out.println(postId);
-        System.out.println(visitorId);
-        Post post = stateService.getPostById(postId);
-        User user = stateService.getUserById(visitorId);
+    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public @ResponseBody String likePost(@RequestParam Long postId, @RequestParam Long visitorId,
+                                       @ModelAttribute State state, HttpServletRequest request){
 
-        String addedLikedName = user.getUserName();
-        Long addLikedId = user.getVisitorId();
+        User sessionUser = new User();
+        sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+//        check to make sure html wasn't tampered with or just is funky
+        if(sessionUser.getVisitorId().equals(visitorId)) {
 
-        post.getLikes().add(user);
-        post.setLikeamnt(post.getLikes().size());
 
-        stateService.saveUser(user);
-        stateService.savePost(post);
-        return "landing_page";
+            Post post = stateService.getPostById(postId);
+            User user = stateService.getUserById(visitorId);
+
+            System.out.println("HEEEEYEYYYYY " + visitorId);
+            System.out.println(post.getLikes().contains(user));
+
+            String addedLikedName = user.getUserName();
+            Long addLikedId = user.getVisitorId();
+
+            if(post.getLikes().contains(user))
+            {
+                post.getLikes().remove(user);
+                post.setLikeamnt(post.getLikes().size());
+                System.out.println("we here");
+                stateService.saveUser(user);
+                stateService.savePost(post);
+                return "Success?";
+            } else{
+                post.getLikes().add(user);
+                post.setLikeamnt(post.getLikes().size());
+
+                stateService.saveUser(user);
+                stateService.savePost(post);
+                return "Success";
+            }
+        }
+        return "Failed";
     }
 
     @GetMapping("/")

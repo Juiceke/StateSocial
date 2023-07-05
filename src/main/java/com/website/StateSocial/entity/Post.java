@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 
 //import javax.persistence.*;
 //
@@ -12,7 +11,6 @@ import jakarta.transaction.Transactional;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

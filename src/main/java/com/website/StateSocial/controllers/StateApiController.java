@@ -11,6 +11,7 @@ import com.website.StateSocial.service.StateService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,29 @@ public class StateApiController {
         sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
        return stateService.getUserById(sessionUser.getVisitorId());
     }
+
+//    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, headers = {})
+//    public @ResponseBody void likePost(@RequestParam Long postId, @RequestParam Long visitorId, @ModelAttribute State state,
+//                                       HttpServletRequest request){
+//        User sessionUser = new User();
+//        sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+////        check to make sure html wasn't tampered with or just is funky
+//        if(sessionUser.getVisitorId().equals(visitorId)) {
+//            System.out.println(postId);
+//            System.out.println(visitorId);
+//            Post post = stateService.getPostById(postId);
+//            User user = stateService.getUserById(visitorId);
+//
+//            String addedLikedName = user.getUserName();
+//            Long addLikedId = user.getVisitorId();
+//
+//            post.getLikes().add(user);
+//            post.setLikeamnt(post.getLikes().size());
+//
+//            stateService.saveUser(user);
+//            stateService.savePost(post);
+//        }
+//    }
 
 ////    very strange, but works!
 //    @PostMapping("/posts/api")

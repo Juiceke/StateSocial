@@ -63,12 +63,8 @@ async function test(postId, userId) {
     headers: {
     "Content-Type": 'application/x-www-form-urlencoded'
     },
-    body: JSON.stringify({
-    postId: postId,
-    visitorId: userId
-    })
  });
- let data = await response.json();
+ let data = await response;
  console.log(data);
 
  // remove all content already on page
@@ -134,10 +130,10 @@ async function test(postId, userId) {
 console.log(posts);
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
+    console.log(e);
     console.log();
-    console.log();
-    postId = e.target.parentElement[0].value;
-    userId = e.target.parentElement[1].value;
+    postId = e.target.form[0].value;
+    userId = e.target.form[1].value;
     console.log(JSON.parse(postId))
     test(postId, userId);
     })
