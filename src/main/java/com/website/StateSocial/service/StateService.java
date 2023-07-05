@@ -24,7 +24,7 @@ public interface StateService {
 
     List<User> getAllUsers();
 
-    List<Post> getAllPostsByState(String state_id);
+//    List<Post> getAllPostsByState(Long state_id);
 
 //    StringTokenizer findUserByEmail(String email);
 }

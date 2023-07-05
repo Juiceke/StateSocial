@@ -36,10 +36,10 @@ public class StateServiceImpl implements StateService {
         return postRepository.findAll();
     }
 
-    @Override
-    public List<Post> getAllPostsByState(String state_id) {
-        return null;
-    }
+//    @Override
+//    public List<Post> getAllPostsByState(Long state_id) {
+
+//    }
 
     @Override
     public Post getPostById(Long post_id) { return postRepository.findById(post_id).get(); }

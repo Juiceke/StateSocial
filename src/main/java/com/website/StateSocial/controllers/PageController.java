@@ -63,7 +63,6 @@ public class PageController {
                 || (Arrays.equals(user.getEmail(), empty) || in(user.getEmail())))
                 || Objects.equals(user.getUserName(), emptyStr)) {
             model.addAttribute("notice", "In order to signup username, email address and password must be populated! emails and passwords can not have spaces!");
-//            return stateService.getAllUsers();
             return "login_page";
         }
         try {
@@ -72,8 +71,6 @@ public class PageController {
             stateService.saveUser(user);
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("notice", "Email address is not available! Please choose a different unique email address.");
-//            return stateService.getAllUsers();
-            user.getEmail().toString();
             return "login_page";
         }
 
@@ -85,7 +82,6 @@ public class PageController {
             }
         } catch (NullPointerException e ) {
             model.addAttribute("notice", "User is not recognized!");
-//            return stateService.getAllUsers();
             return "login_page";
         }
 
@@ -94,7 +90,6 @@ public class PageController {
         request.getSession().setAttribute("SESSION_USER", sessionUser);
 
         return "redirect:/";
-//        return  stateService.getAllUsers();
     }
 
 

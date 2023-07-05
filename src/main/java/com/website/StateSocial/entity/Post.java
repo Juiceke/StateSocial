@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 //import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -206,6 +207,30 @@ public class Post implements Serializable {
 
     public void setUserLiked(User userLiked) {
         this.userLiked = userLiked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post post)) return false;
+        return likeAmnt == post.likeAmnt && Objects.equals(postId, post.postId) && Objects.equals(state, post.state) && Objects.equals(stateName, post.stateName) && Objects.equals(visitorName, post.visitorName) && Objects.equals(userPosted, post.userPosted) && Objects.equals(visitor, post.visitor) && Objects.equals(postTitle, post.postTitle) && Objects.equals(postBody, post.postBody) && Objects.equals(userLiked, post.userLiked) && Objects.equals(likes, post.likes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(postId, state, stateName, visitorName, userPosted, visitor, postTitle, postBody, userLiked, likes, likeAmnt);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", stateName='" + stateName + '\'' +
+                ", visitorName='" + visitorName + '\'' +
+                ", postTitle='" + postTitle + '\'' +
+                ", postBody='" + postBody + '\'' +
+                ", likeAmnt=" + likeAmnt +
+                '}';
     }
 }
 

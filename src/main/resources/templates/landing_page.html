@@ -12,12 +12,15 @@
 <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
-        <select class="form" id="test" name="stateSelect" onchange="test()">
-            <option value="">Select state</option>
-            <option th:each="state: ${states}"
-                th:value="${state.stateId}"
-                th:text="${user.visitorId}"></option>
-        </select>
+        <form th:action="@{/test}" method="GET">
+            <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect" onchange="test()">
+                <option  value="">Select state</option>
+                <option th:each="state: ${states}"
+                    th:value="${state.stateId}"
+                    th:text="${state.stateName}"></option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
     </nav>
     <div th:if="${loggedIn}">
     <a class="" th:href="@{/users/logout}">logout</a>
@@ -27,7 +30,18 @@
     </div>
 
 </div>
-<div class="content" id="pageContent">
+<div class="content post-group" id="pageContent" th:if="${posts}" >
+    <form method="POST" class="post" th:each="post: ${posts}" th:action="@{/posts/like}">
+<!--    <div class="post">-->
+        <div class="post_title" th:text="${post.postTitle}"></div>
+        <div class="post_body" th:text="${post.postBody}"></div>
+        <div class="post_user" th:text="${post.visitorName}"></div>
+        <div th:text="${post.likeamnt}"></div>
+        <input type="hidden" th:value="${post.postId}" class="postId" name="postId">
+        <input type="hidden" th:field="${user.visitorId}" name="visitorId" class="visitorId">
+        <input type="button" class="btn">smile</input>
+<!--    </div>-->
+    </form>
 
 </div>
 

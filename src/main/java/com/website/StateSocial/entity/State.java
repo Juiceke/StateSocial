@@ -30,9 +30,8 @@ public class State implements Serializable{
     @JsonView(View.Public.class)
     private String stateAbbr;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "state", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "state", cascade = CascadeType.ALL)
     @Column(name = "state_posts")
-    @JsonView(View.Public.class)
     private List<Post> posts;
 
     public State() {
