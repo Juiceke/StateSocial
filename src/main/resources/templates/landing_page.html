@@ -36,7 +36,7 @@
         <div class="post_title" th:text="${post.postTitle}"></div>
         <div class="post_body" th:text="${post.postBody}"></div>
         <div class="post_user" th:text="${post.visitorName}"></div>
-        <div>likes <span th:text="${post.likeamnt}"></span></div>
+        <div>likes <span class="likes" th:text="${post.likeamnt}"></span></div>
         <div th:if="${loggedIn}">
             <input type="hidden" th:value="${post.postId}" class="postId" name="postId">
             <input type="hidden" th:field="${user.visitorId}" name="visitorId" class="visitorId">

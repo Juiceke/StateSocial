@@ -3,19 +3,6 @@ const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
 const postGroup = document.getElementById('pageContent');
 console.log(postGroup);
-//const original = document.getElementById("no").value;
-//
-//let toCheck = original;
-//
-//console.log(original);
-
-
-
-
-async function checker() {
-console.log(toCheck);
-
-}
 
 window.onscroll = function() {stickyHeader()};
 
@@ -37,35 +24,27 @@ const url = 'http://localhost:8080/session'
  return data.visitorId;
 }
 
-async function test(postId, userId) {
+async function getJSON(url, e) {
+    return await fetch(url, {
+               method: "POST",
+               headers: {
+               "Content-Type": 'application/x-www-form-urlencoded'
+               },
+            }).then((response) => response.text())
+            .then((data) => {
+            if(data == "Success") {
+                e.target.form.childNodes[9].childNodes[1].innerHTML++
+            } else {
+                e.target.form.childNodes[9].childNodes[1].innerHTML--
+            }
+            return data});
+}
+
+async function test(postId, userId, e) {
  // get info from backend
-
-// const button = e.target.nodeName === 'BUTTON'
-//
-// if(!button) {
-// return
-// }
-
-// console.log(e.target.id)
-
-
-
  const url = `http://localhost:8080/posts/like?postId=${postId}&visitorId=${userId}`;
-
-
- for(i=0; i < document.getElementsByClassName("postId").length; i++) {
-    console.log(posts[i].value);
- }
-
- console.log(JSON.stringify(postId));
- let response = await fetch(url, {
-    method: "POST",
-    headers: {
-    "Content-Type": 'application/x-www-form-urlencoded'
-    },
- });
- let data = await response;
- console.log(data);
+ const json = await this.getJSON(url, e);
+ console.log(json);
 
  // remove all content already on page
 //  page.textContent = '';
@@ -125,17 +104,15 @@ async function test(postId, userId) {
     return;
  }
 
- const posts = document.getElementsByClassName("btn")
-// user();
-console.log(posts);
+ const posts = document.getElementsByClassName("btn");
+
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
-    console.log(e);
-    console.log();
+    console.log(e.target.form.childNodes[9].childNodes[1].innerHTML)
+//    e.target.form.childNodes[9].childNodes[1].innerHTML++
     postId = e.target.form[0].value;
     userId = e.target.form[1].value;
-    console.log(JSON.parse(postId))
-    test(postId, userId);
+    test(postId, userId, e);
     })
 
  }
