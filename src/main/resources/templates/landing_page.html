@@ -13,7 +13,7 @@
     <nav>
         <h2>HEAD</h2>
         <form th:action="@{/test}" method="GET">
-            <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect" onchange="test()">
+            <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
                 <option  value="">Select state</option>
                 <option th:each="state: ${states}"
                     th:value="${state.stateId}"

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -122,7 +123,7 @@ public class StateController {
 //    }
 
     @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public @ResponseBody String likePost(@RequestParam Long postId, @RequestParam Long visitorId,
+    public @ResponseBody Post likePost(@RequestParam Long postId, @RequestParam Long visitorId,
                                        @ModelAttribute State state, HttpServletRequest request){
 
         User sessionUser = new User();
@@ -139,25 +140,28 @@ public class StateController {
 
             String addedLikedName = user.getUserName();
             Long addLikedId = user.getVisitorId();
+//            try {
+            if(post.getLikes().contains(user) && user.getLikedPosts().contains(post)) {
 
-            if(post.getLikes().contains(user))
-            {
-                post.getLikes().remove(user);
-                post.setLikeamnt(post.getLikes().size());
-                System.out.println("we here");
-                stateService.saveUser(user);
-                stateService.savePost(post);
-                return "Success?";
-            } else{
+                    post.getLikes().remove(user);
+                    post.setLikeamnt(post.getLikes().size());
+
+//                    stateService.saveUser(user);
+
+                    return stateService.savePost(post);
+                } else if(!post.getLikes().contains(user) && !user.getLikedPosts().contains(post)){
                 post.getLikes().add(user);
                 post.setLikeamnt(post.getLikes().size());
 
-                stateService.saveUser(user);
-                stateService.savePost(post);
-                return "Success";
+//                stateService.saveUser(user);
+                return stateService.savePost(post);
+//                return "Success";
             }
+//            } catch (SQLIntegrityConstraintViolationException e) {
+//                System.out.println(e);
+//            }
         }
-        return "Failed";
+        return new Post();
     }
 
     @GetMapping("/")
