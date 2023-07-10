@@ -1,8 +1,7 @@
 const state = document.getElementById("test");
 const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
-const postGroup = document.getElementById('pageContent');
-console.log(postGroup);
+const posts = document.getElementsByClassName("btn");
 
 window.onscroll = function() {stickyHeader()};
 
@@ -35,25 +34,25 @@ async function getJSON(url, e) {
             const pageLikes = e.target.form.childNodes[9].childNodes[1].innerHTML;
             if(data.likeamnt > pageLikes) {
                 e.target.form.childNodes[9].childNodes[1].innerHTML++
-            } else if (data.likeamnt < pageLikes) {
+            } else if (data.likeamnt < pageLikes && data.postBody) {
                 e.target.form.childNodes[9].childNodes[1].innerHTML--
             }
             return data});
 }
 
-async function test(postId, userId, e) {
+async function clicked(postId, userId, e) {
  // get info from backend
  const url = `http://localhost:8080/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);
  }
 
- const posts = document.getElementsByClassName("btn");
+
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
     postId = e.target.form[0].value;
     userId = e.target.form[1].value;
-    test(postId, userId, e);
+    clicked(postId, userId, e);
     })
 
  }

@@ -1,0 +1,34 @@
+.card {
+margin: 16px;
+max-width: 600px;
+width: 100%;
+padding: 6px;
+background: #FBEEC1;
+color: black;
+box-shadow: 1px 6px 3px black;
+}
+
+.body_sign {
+ height: 300px;
+ box-sizing: border-box;
+ display: block;
+ width: 100%;
+
+}
+
+.title_sign {
+height: 100px;
+}
+
+.title_sign, .body_sign {
+width: 100%;
+border: 3px solid black;
+resize: none;
+background: white;
+}
+
+textarea:focus {
+outline:none;
+}
+
+

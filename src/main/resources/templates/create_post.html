@@ -6,18 +6,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/style/main.css">
+    <link rel="stylesheet" href="/style/create.css">
 </head>
 <body>
 <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
-        <form>
-            <select class="form" id="test" name="stateSelect" onchange="test()">
-                <option value="">Select state</option>
+        <form th:action="@{/posts}" method="GET">
+            <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
+                <option value="1">Select state</option>
                 <option th:each="state: ${states}"
-                    th:value="${state.stateId}"
-                    th:text="${state.stateName}"></option>
+                        th:value="${state.stateId}"
+                        th:text="${state.stateName}"></option>
             </select>
+            <button type="submit">Submit</button>
         </form>
     </nav>
     <div th:if="${loggedIn}">
@@ -32,26 +34,27 @@
     <div th:if="${notice}" class="flash-message">
         <h3>[[${notice}]]</h3>
     </div>
+
+    <div  class="card" id="card">
     <form method="POST" th:action="@{/posts/api}" class="signup-form" >
-        <div>
-        <div>
-            <label for="userName_sign">Post Title:</label>
-            <input type="text" id="userName_sign" th:field="${post.postTitle}" name="postTitle"/>
-        </div>
-        <div>
-            <label for="email_sign">Post Body:</label>
-            <input type="text" id="email_sign"  th:field="${post.postBody}" name="postBody"/>
-        </div>
-        <div>
-            <label for="password_sign">State:</label>
-            <input type="text" id="password_sign" th:field="${state.stateId}" th:name="stateId"/>
-        </div>
-        <div>
-            <input type="hidden" th:field="${user.visitorId}" readonly/>
-            <button type="submit" >Post</button>
-        </div>
-        </div>
+            <div>
+                <textarea type="text" placeholder="Please insert title of post here!" class="card-title title_sign" id="title_sign"
+                          th:field="${post.postTitle}" name="postTitle"></textarea>
+            </div>
+            <div>
+                <textarea class="card-text body_sign" id="body_sign" placeholder="please insert post here!"
+                          th:field="${post.postBody}" name="postBody"></textarea>
+            </div>
+            <div>
+                <label for="state_sign"></label>
+                <input type="hidden" id="state_sign" th:field="${state.stateId}" th:name="stateId"/>
+            </div>
+            <div>
+                <input type="hidden" th:field="${user.visitorId}" readonly/>
+                <button type="submit" class="btn">Post</button>
+            </div>
     </form>
+    </div>
 </div>
 
 </body>

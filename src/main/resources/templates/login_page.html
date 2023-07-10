@@ -23,7 +23,7 @@
     <div th:if="${notice}" class="flash-message">
         <h3>[[${notice}]]</h3>
     </div>
-    <form action="login" method="POST" th:action="@{/users}" th:object="${user}"  class="signup-form" >
+    <form method="POST" th:action="@{/users}" th:object="${user}"  class="signup-form" >
         <div>
             <label for="userName_sign">username:</label>
             <input type="text" id="userName_sign" th:field="*{userName}"/>
@@ -41,7 +41,7 @@
         </div>
     </form>
 
-    <form action="login" method="POST" th:action="@{/users/login}" th:object="${user}"  class="signup-form" >
+    <form method="POST" th:action="@{/users/login}" th:object="${user}"  class="signup-form" >
         <div>
             <label for="email_login">email:</label>
             <input type="text" id="email_login"  th:field="*{email}"/>
@@ -51,7 +51,7 @@
             <input type="password" id="password_login" th:field="*{password}"/>
         </div>
         <div>
-            <button type="submit">signup</button>
+            <button type="submit">login</button>
         </div>
     </form>
 <!--    <p th:text="${notice} ?: 'IDK'"></p>-->

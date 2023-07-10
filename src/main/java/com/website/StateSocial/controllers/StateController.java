@@ -46,9 +46,10 @@ public class StateController {
 //        model.addAttribute("loggedIn", sessionUser.isLoggedIn());
 //    }
 
-    @GetMapping("/create")
-    public String createPost(@ModelAttribute Post post, Model model, @ModelAttribute State state, HttpServletRequest request) {
+    @GetMapping("/specific")
+    public String beSpecific(Model model, HttpServletRequest request, @ModelAttribute State state) {
         model.addAttribute("states", stateService.getAllStates());
+
         User sessionUser = new User();
 
         if (request.getSession(false) != null) {
@@ -62,6 +63,30 @@ public class StateController {
         }
 
 
+        return "Specific";
+    }
+
+    @GetMapping("/create")
+    public String no() {
+        return "redirect:/";
+    }
+
+    @PostMapping("/create")
+    public String createPost(@ModelAttribute Post post, Model model, @ModelAttribute State state,
+                             HttpServletRequest request) {
+        model.addAttribute("states", stateService.getAllStates());
+        System.out.println(state);
+        User sessionUser = new User();
+
+        if (request.getSession(false) != null) {
+            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+//            System.out.println(request.getSession().getAttribute("SESSION_USER"));
+            model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+            model.addAttribute("user", sessionUser);
+        } else {
+            model.addAttribute("loggedIn", false);
+            return "redirect:/login";
+        }
 
         return "create_post";
     }
@@ -94,8 +119,8 @@ public class StateController {
         }
     }
 
-    @GetMapping("/test")
-    public String test(Model model, @ModelAttribute State state, HttpServletRequest request, @ModelAttribute Post post) {
+    @GetMapping("/posts")
+    public String posts(Model model, @ModelAttribute State state, @ModelAttribute Post post, HttpServletRequest request) {
         model.addAttribute("states", stateService.getAllStates());
         System.out.println(state);
         User sessionUser = new User();

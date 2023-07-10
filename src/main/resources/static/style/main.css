@@ -32,7 +32,9 @@ padding: 16px;
 .post {
 margin: 16px;
 max-width: 600px;
+word-wrap: break-word;
 width: 100%;
+flex-wrap: wrap;
 padding: 6px;
 background: #FBEEC1;
 color: black;

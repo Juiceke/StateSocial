@@ -12,9 +12,9 @@
 <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
-        <form th:action="@{/test}" method="GET">
+        <form th:action="@{/posts}" method="GET">
             <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
-                <option  value="">Select state</option>
+                <option value="1">Select state</option>
                 <option th:each="state: ${states}"
                     th:value="${state.stateId}"
                     th:text="${state.stateName}"></option>
@@ -22,6 +22,9 @@
             <button type="submit">Submit</button>
         </form>
     </nav>
+    <div>
+        <h3><a th:href="@{/specific}">Create Post!</a></h3>
+    </div>
     <div th:if="${loggedIn}">
     <a class="" th:href="@{/users/logout}">logout</a>
 </div>
