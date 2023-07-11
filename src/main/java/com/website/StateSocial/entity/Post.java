@@ -56,7 +56,7 @@ public class Post implements Serializable {
     @JsonView(View.Public.class)
     private String postTitle;
 
-    @Column(name = "post_body")
+    @Column(name = "post_body", length = 4000)
     @JsonView(View.Public.class)
     private String postBody;
 

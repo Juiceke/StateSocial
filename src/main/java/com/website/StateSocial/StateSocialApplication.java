@@ -31,18 +31,6 @@ public class StateSocialApplication implements CommandLineRunner {
 		SpringApplication.run(StateSocialApplication.class, args);
 	}
 
-//	@Autowired
-//	CharacterEncodingFilter characterEncodingFilter;
-//
-//	@Bean
-//	@Order(Ordered.HIGHEST_PRECEDENCE)
-//	CharacterEncodingFilter characterEncodingFilter() {
-//		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//		filter.setEncoding("UTF-8");
-//		filter.setForceEncoding(true);
-//		return filter;
-//	}
-
 	@Autowired
 	private StateRepository stateRepository;
 

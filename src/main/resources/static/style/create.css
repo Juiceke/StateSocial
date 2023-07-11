@@ -13,7 +13,7 @@ box-shadow: 1px 6px 3px black;
  box-sizing: border-box;
  display: block;
  width: 100%;
-
+ maxlength
 }
 
 .title_sign {
@@ -25,6 +25,10 @@ width: 100%;
 border: 3px solid black;
 resize: none;
 background: white;
+}
+
+textarea {
+
 }
 
 textarea:focus {

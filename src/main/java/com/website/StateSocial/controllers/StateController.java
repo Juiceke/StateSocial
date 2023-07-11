@@ -111,6 +111,13 @@ public class StateController {
             postRequest.setVisitorName(user.getUserName());
             postRequest.setUserPosted(user);
 
+            if(postRequest.getPostTitle().length() > 255
+               || postRequest.getPostBody().length() > 4000) {
+                model.addAttribute("notice",
+                        "Content longer than it should be!");
+                return "create_post";
+            }
+
             stateService.savePost(postRequest);
             return "redirect:/";
         } else {

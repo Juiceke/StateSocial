@@ -38,11 +38,11 @@
     <div  class="card" id="card">
     <form method="POST" th:action="@{/posts/api}" class="signup-form" >
             <div>
-                <textarea type="text" placeholder="Please insert title of post here!" class="card-title title_sign" id="title_sign"
+                <textarea type="text" maxlength="255" placeholder="Please insert title of post here!" class="card-title title_sign" id="title_sign"
                           th:field="${post.postTitle}" name="postTitle"></textarea>
             </div>
             <div>
-                <textarea class="card-text body_sign" id="body_sign" placeholder="please insert post here!"
+                <textarea maxlength="4000" class="card-text body_sign" id="body_sign" placeholder="please insert post here!"
                           th:field="${post.postBody}" name="postBody"></textarea>
             </div>
             <div>
