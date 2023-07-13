@@ -2,6 +2,7 @@ const state = document.getElementById("test");
 const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
 const posts = document.getElementsByClassName("btn");
+const test = document.getElementById("test");
 
 window.onscroll = function() {stickyHeader()};
 
@@ -40,13 +41,17 @@ async function getJSON(url, e) {
             return data});
 }
 
+
 async function clicked(postId, userId, e) {
  // get info from backend
  const url = `http://localhost:8080/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);
  }
 
-
+document.addEventListener("change", (e) => {
+console.log(document.forms);
+document.forms[0].submit();
+})
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
