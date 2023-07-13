@@ -172,26 +172,19 @@ public class StateController {
 
             String addedLikedName = user.getUserName();
             Long addLikedId = user.getVisitorId();
-//            try {
+
             if(post.getLikes().contains(user) && user.getLikedPosts().contains(post)) {
 
                     post.getLikes().remove(user);
                     post.setLikeamnt(post.getLikes().size());
-
-//                    stateService.saveUser(user);
-
                     return stateService.savePost(post);
                 } else if(!post.getLikes().contains(user) && !user.getLikedPosts().contains(post)){
                 post.getLikes().add(user);
                 post.setLikeamnt(post.getLikes().size());
 
-//                stateService.saveUser(user);
                 return stateService.savePost(post);
-//                return "Success";
             }
-//            } catch (SQLIntegrityConstraintViolationException e) {
-//                System.out.println(e);
-//            }
+
         }
         return new Post();
     }
@@ -232,10 +225,25 @@ public class StateController {
     }
 
     @GetMapping("/{visitorId}/user")
-    public String userPage(Model model, @PathVariable Long visitorId) {
-        model.addAttribute("user", stateService.getUserById(visitorId));
-        System.out.println(stateService.getUserById(visitorId));
-        return "user_page";
+    public String userPage(Model model, @PathVariable Long visitorId, HttpServletRequest request) {
+        User sessionUser = new User();
+
+        if (request.getSession(false) != null) {
+            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+//            System.out.println(request.getSession().getAttribute("SESSION_USER"));
+            model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+            try {
+                model.addAttribute("user", stateService.getUserById(visitorId));
+                return "user_page";
+            } catch (Exception exception) {
+                model.addAttribute("userdont", "user does not exist");
+                return "user_page";
+            }
+        } else {
+            model.addAttribute("loggedIn", false);
+            return "redirect:/login";
+        }
+
     }
 
 //    @GetMapping("/{visitorId}/user")

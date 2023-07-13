@@ -7,12 +7,25 @@ display: flex
 justify-content: center;
 }
 
+
 .header {
     padding: 10px 16px;
     background: #DAAD86;
     color: white;
     display: flex;
     justify-content: space-between;
+    z-index: 999;
+}
+
+/* I want the header to be sticky for ease of access */
+.sticky {
+    position: fixed;
+    top:0;
+    width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
 }
 
 .link, a:link, a:visited {
@@ -39,6 +52,11 @@ padding: 6px;
 background: #FBEEC1;
 color: black;
 box-shadow: 1px 6px 3px black;
+border-radius: 5px;
+}
+
+.middle {
+text-align: center;
 }
 
 .post_user {
@@ -58,13 +76,4 @@ border-bottom: .5px solid;
   text-align: center;
 }
 
-/* I want the header to be sticky for ease of access */
-.sticky {
-    position: fixed;
-    top:0;
-    width: 100%;
-}
 
-.sticky + .content {
-  padding-top: 102px;
-}
