@@ -37,13 +37,15 @@
 
     <div  class="card" id="card">
     <form method="POST" th:action="@{/posts/api}" class="signup-form" >
-            <div>
+            <div id="title">
                 <textarea type="text" maxlength="255" placeholder="Please insert title of post here!" class="card-title title_sign" id="title_sign"
                           th:field="${post.postTitle}" name="postTitle"></textarea>
+                <div>Characters left: <span id="title_num">255</span></div>
             </div>
             <div>
                 <textarea maxlength="4000" class="card-text body_sign" id="body_sign" placeholder="please insert post here!"
                           th:field="${post.postBody}" name="postBody"></textarea>
+                <div>Characters left: <span id="body_num">4000</span></div>
             </div>
             <div>
                 <label for="state_sign"></label>
@@ -59,4 +61,5 @@
 
 </body>
 <script src="/js/landing_page.js"></script>
+<script src="/js/create_post.js"></script>
 </html>

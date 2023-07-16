@@ -49,10 +49,12 @@ async function clicked(postId, userId, e) {
  const json = await this.getJSON(url, e);
  }
 
+for(i=0; i < states; i++) {
 states.addEventListener("change", (e) => {
 console.log(states);
 states.submit();
 })
+}
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
