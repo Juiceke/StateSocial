@@ -12,14 +12,13 @@
 <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
-        <form th:action="@{/posts}" method="GET">
+        <form th:action="@{/posts}" method="POST" id="submit">
             <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
                 <option value="1">Select state</option>
                 <option th:each="state: ${states}"
                     th:value="${state.stateId}"
                     th:text="${state.stateName}"></option>
             </select>
-            <button type="submit">Submit</button>
         </form>
     </nav>
     <div>
@@ -32,6 +31,9 @@
         <a th:href="@{/login}">login</a>
     </div>
 
+</div>
+<div th:if="${notice}" class="flash-message">
+    <h3>[[${notice}]]</h3>
 </div>
 <div class="content post-group" id="pageContent" th:if="${posts}" >
     <form method="POST" class="post" th:each="post: ${posts}" th:action="@{/posts/like}">

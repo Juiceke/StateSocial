@@ -1,6 +1,7 @@
 const state = document.getElementById("test");
 const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
+const states = document.getElementById("submit")
 const posts = document.getElementsByClassName("btn");
 const test = document.getElementById("test");
 
@@ -48,9 +49,9 @@ async function clicked(postId, userId, e) {
  const json = await this.getJSON(url, e);
  }
 
-document.addEventListener("change", (e) => {
-console.log(document.forms);
-document.forms[0].submit();
+states.addEventListener("change", (e) => {
+console.log(states);
+states.submit();
 })
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {

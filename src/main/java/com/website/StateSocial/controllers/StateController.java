@@ -126,7 +126,7 @@ public class StateController {
         }
     }
 
-    @GetMapping("/posts")
+    @PostMapping("/posts")
     public String posts(Model model, @ModelAttribute State state, @ModelAttribute Post post, HttpServletRequest request) {
         model.addAttribute("states", stateService.getAllStates());
         System.out.println(state);
@@ -142,10 +142,12 @@ public class StateController {
         }
 
         model.addAttribute("loggedIn", sessionUser.isLoggedIn());
-        model.addAttribute("posts", stateService.getStateById(state.getStateId()).getPosts());
-
-        State sessionState = new State();
-
+        if(state.getStateId() > 50 || state.getStateId() < 0) {
+            model.addAttribute("notice", "state selected outside of what was expected. please try again.");
+        }
+        else {
+            model.addAttribute("posts", stateService.getStateById(state.getStateId()).getPosts());
+        }
         return "landing_page";
     }
 
@@ -184,7 +186,6 @@ public class StateController {
 
                 return stateService.savePost(post);
             }
-
         }
         return new Post();
     }

@@ -28,7 +28,7 @@
     </div>
 
     <div class="card">
-        <form th:action="@{/create}" method="POST">
+        <form th:action="@{/create}" method="POST" id="submit">
             <select class="form card-title" th:field="*{state.stateId}" name="stateSelect">
                 <option value="1">Please select a state to make a post for!</option>
                 <option th:each="state: ${states}"
