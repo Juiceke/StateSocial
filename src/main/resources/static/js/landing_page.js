@@ -5,6 +5,8 @@ const states = document.getElementById("submit")
 const posts = document.getElementsByClassName("btn");
 const test = document.getElementById("test");
 
+console.log(states);
+
 window.onscroll = function() {stickyHeader()};
 
 const sticky = header.offsetTop
@@ -49,9 +51,9 @@ async function clicked(postId, userId, e) {
  const json = await this.getJSON(url, e);
  }
 
-for(i=0; i < states; i++) {
+for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
-console.log(states);
+console.log(e);
 states.submit();
 })
 }

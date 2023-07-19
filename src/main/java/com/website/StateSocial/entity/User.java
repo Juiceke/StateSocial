@@ -34,7 +34,7 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false, unique = true)
     private char[] password;
 
-    @Column(name ="email", nullable = false, unique = true, length = 249)
+    @Column(name = "email", nullable = false, unique = true, length = 249)
     private char[] email;
 
     @ManyToMany(mappedBy = "likes", fetch = FetchType.LAZY)
@@ -130,6 +130,38 @@ public class User implements Serializable {
         result = 31 * result + Arrays.hashCode(password);
         result = 31 * result + Arrays.hashCode(email);
         return result;
+//    }
+
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof User)) return false;
+//        User user = (User) o;
+//        return loggedIn == user.loggedIn && Objects.equals(visitorId, user.visitorId) && Objects.equals(postId, user.postId) && Objects.equals(userName, user.userName) && Arrays.equals(password, user.password) && Arrays.equals(email, user.email) && Objects.equals(likedPosts, user.likedPosts) && Objects.equals(posts, user.posts);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = Objects.hash(visitorId, postId, userName, likedPosts, loggedIn, posts);
+//        result = 31 * result + Arrays.hashCode(password);
+//        result = 31 * result + Arrays.hashCode(email);
+//        return result;
+//    }
+
+//    @Override
+//    public String toString() {
+//        return "User{" +
+//                "visitorId=" + visitorId +
+//                ", userName='" + userName + '\'' +
+//                ", password=" + Arrays.toString(password) +
+//                ", email=" + Arrays.toString(email) +
+//                ", loggedIn=" + loggedIn +
+//                ", posts=" + posts +
+//                '}';
+//    }
+
+
     }
 
     @Override
