@@ -1,6 +1,6 @@
 package com.website.StateSocial;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+//import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import com.website.StateSocial.entity.State;
 import com.website.StateSocial.repository.StateRepository;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -22,7 +22,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-@EnableEncryptableProperties
+//@EnableEncryptableProperties
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class StateSocialApplication implements CommandLineRunner {
 
