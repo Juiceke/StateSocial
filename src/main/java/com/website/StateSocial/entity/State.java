@@ -77,24 +77,10 @@ public class State implements Serializable{
         this.posts = posts;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof State state)) return false;
-        return Objects.equals(stateId, state.stateId) && Objects.equals(stateName, state.stateName) && Objects.equals(stateAbbr, state.stateAbbr) && Objects.equals(posts, state.posts);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(stateId, stateName, stateAbbr, posts);
-    }
-
-
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
-//        if (!(o instanceof State)) return false;
-//        State state = (State) o;
+//        if (!(o instanceof State state)) return false;
 //        return Objects.equals(stateId, state.stateId) && Objects.equals(stateName, state.stateName) && Objects.equals(stateAbbr, state.stateAbbr) && Objects.equals(posts, state.posts);
 //    }
 //
@@ -102,6 +88,20 @@ public class State implements Serializable{
 //    public int hashCode() {
 //        return Objects.hash(stateId, stateName, stateAbbr, posts);
 //    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof State)) return false;
+        State state = (State) o;
+        return Objects.equals(stateId, state.stateId) && Objects.equals(stateName, state.stateName) && Objects.equals(stateAbbr, state.stateAbbr) && Objects.equals(posts, state.posts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stateId, stateName, stateAbbr, posts);
+    }
 
     @Override
     public String toString() {

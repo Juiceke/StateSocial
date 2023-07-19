@@ -117,37 +117,37 @@ public class User implements Serializable {
         this.posts = posts;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return loggedIn == user.loggedIn && Objects.equals(visitorId, user.visitorId) && Objects.equals(userName, user.userName) && Arrays.equals(password, user.password) && Arrays.equals(email, user.email) && Objects.equals(posts, user.posts);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(visitorId, userName, loggedIn, posts);
-        result = 31 * result + Arrays.hashCode(password);
-        result = 31 * result + Arrays.hashCode(email);
-        return result;
-//    }
-
-
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
-//        if (!(o instanceof User)) return false;
-//        User user = (User) o;
-//        return loggedIn == user.loggedIn && Objects.equals(visitorId, user.visitorId) && Objects.equals(postId, user.postId) && Objects.equals(userName, user.userName) && Arrays.equals(password, user.password) && Arrays.equals(email, user.email) && Objects.equals(likedPosts, user.likedPosts) && Objects.equals(posts, user.posts);
+//        if (!(o instanceof User user)) return false;
+//        return loggedIn == user.loggedIn && Objects.equals(visitorId, user.visitorId) && Objects.equals(userName, user.userName) && Arrays.equals(password, user.password) && Arrays.equals(email, user.email) && Objects.equals(posts, user.posts);
 //    }
 //
 //    @Override
 //    public int hashCode() {
-//        int result = Objects.hash(visitorId, postId, userName, likedPosts, loggedIn, posts);
+//        int result = Objects.hash(visitorId, userName, loggedIn, posts);
 //        result = 31 * result + Arrays.hashCode(password);
 //        result = 31 * result + Arrays.hashCode(email);
 //        return result;
-//    }
+////    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return loggedIn == user.loggedIn && Objects.equals(visitorId, user.visitorId) && Objects.equals(postId, user.postId) && Objects.equals(userName, user.userName) && Arrays.equals(password, user.password) && Arrays.equals(email, user.email) && Objects.equals(likedPosts, user.likedPosts) && Objects.equals(posts, user.posts);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(visitorId, postId, userName, likedPosts, loggedIn, posts);
+        result = 31 * result + Arrays.hashCode(password);
+        result = 31 * result + Arrays.hashCode(email);
+        return result;
+    }
 
 //    @Override
 //    public String toString() {
@@ -160,9 +160,6 @@ public class User implements Serializable {
 //                ", posts=" + posts +
 //                '}';
 //    }
-
-
-    }
 
     @Override
     public String toString() {

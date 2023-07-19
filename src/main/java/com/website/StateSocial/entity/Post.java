@@ -209,24 +209,10 @@ public class Post implements Serializable {
 
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post post)) return false;
-        return likeAmnt == post.likeAmnt && Objects.equals(postId, post.postId) && Objects.equals(state, post.state) && Objects.equals(stateName, post.stateName) && Objects.equals(visitorName, post.visitorName) && Objects.equals(userPosted, post.userPosted) && Objects.equals(visitor, post.visitor) && Objects.equals(postTitle, post.postTitle) && Objects.equals(postBody, post.postBody) && Objects.equals(userLiked, post.userLiked) && Objects.equals(likes, post.likes);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(postId, state, stateName, visitorName, userPosted, visitor, postTitle, postBody, userLiked, likes, likeAmnt);
-    }
-
-
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
-//        if (!(o instanceof Post)) return false;
-//        Post post = (Post) o;
+//        if (!(o instanceof Post post)) return false;
 //        return likeAmnt == post.likeAmnt && Objects.equals(postId, post.postId) && Objects.equals(state, post.state) && Objects.equals(stateName, post.stateName) && Objects.equals(visitorName, post.visitorName) && Objects.equals(userPosted, post.userPosted) && Objects.equals(visitor, post.visitor) && Objects.equals(postTitle, post.postTitle) && Objects.equals(postBody, post.postBody) && Objects.equals(userLiked, post.userLiked) && Objects.equals(likes, post.likes);
 //    }
 //
@@ -234,6 +220,20 @@ public class Post implements Serializable {
 //    public int hashCode() {
 //        return Objects.hash(postId, state, stateName, visitorName, userPosted, visitor, postTitle, postBody, userLiked, likes, likeAmnt);
 //    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post)) return false;
+        Post post = (Post) o;
+        return likeAmnt == post.likeAmnt && Objects.equals(postId, post.postId) && Objects.equals(state, post.state) && Objects.equals(stateName, post.stateName) && Objects.equals(visitorName, post.visitorName) && Objects.equals(userPosted, post.userPosted) && Objects.equals(visitor, post.visitor) && Objects.equals(postTitle, post.postTitle) && Objects.equals(postBody, post.postBody) && Objects.equals(userLiked, post.userLiked) && Objects.equals(likes, post.likes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(postId, state, stateName, visitorName, userPosted, visitor, postTitle, postBody, userLiked, likes, likeAmnt);
+    }
 
     @Override
     public String toString() {
