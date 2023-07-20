@@ -3,7 +3,7 @@ package com.website.StateSocial.controllers;
 import com.website.StateSocial.entity.User;
 import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
