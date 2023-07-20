@@ -3,7 +3,7 @@ package com.website.StateSocial.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 //import javax.persistence.*;
 //
