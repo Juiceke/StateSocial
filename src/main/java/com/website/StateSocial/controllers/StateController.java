@@ -216,6 +216,8 @@ public class StateController {
         if (request.getSession(false) != null) {
             return "redirect:/";
         }
+//        obtain cookie now
+        request.getSession();
         model.addAttribute("user", new User());
         return "login_page";
     }
