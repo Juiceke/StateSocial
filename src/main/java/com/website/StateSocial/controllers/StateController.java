@@ -6,15 +6,16 @@ import com.website.StateSocial.entity.State;
 import com.website.StateSocial.entity.User;
 import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+//import javax.servlet.http.HttpServletRequest;
 //import java.sql.SQLIntegrityConstraintViolationException;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,6 @@ public class StateController {
     @GetMapping("/specific")
     public String beSpecific(Model model, HttpServletRequest request, @ModelAttribute State state) {
         model.addAttribute("states", stateService.getAllStates());
-
         User sessionUser = new User();
 
         if (request.getSession(false) != null) {
@@ -177,10 +177,12 @@ public class StateController {
 
             if(post.getLikes().contains(user) && user.getLikedPosts().contains(post)) {
 
+                    System.out.println("ayyy");
                     post.getLikes().remove(user);
                     post.setLikeamnt(post.getLikes().size());
                     return stateService.savePost(post);
                 } else if(!post.getLikes().contains(user) && !user.getLikedPosts().contains(post)){
+                System.out.println("whyyyy");
                 post.getLikes().add(user);
                 post.setLikeamnt(post.getLikes().size());
 

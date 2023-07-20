@@ -7,7 +7,7 @@ import com.website.StateSocial.entity.User;
 
 import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
-
+//import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+
 
 
 @RestController

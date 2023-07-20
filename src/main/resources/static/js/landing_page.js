@@ -36,6 +36,7 @@ async function getJSON(url, e) {
             }).then((response) => response.json())
             .then((data) => {
             const pageLikes = e.target.form.childNodes[9].childNodes[1].innerHTML;
+            console.log(data);
             if(data.likeamnt > pageLikes) {
                 e.target.form.childNodes[9].childNodes[1].innerHTML++
             } else if (data.likeamnt < pageLikes && data.postBody) {
