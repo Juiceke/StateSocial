@@ -48,12 +48,12 @@ async function getJSON(url, e) {
 
 async function clicked(postId, userId, e) {
  // get info from backend
- const url = `http://localhost:8080/posts/like?postId=${postId}&visitorId=${userId}`;
+ const url = "http://" + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);
  }
 
  async function setSessionState(stateId) {
- const url = `http://localhost:8080/posts?stateId=${stateId}`;
+ const url = "http://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
  const json = await this.getSessionState(url);
  }
 
@@ -79,6 +79,7 @@ async function clicked(postId, userId, e) {
 
 for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
+console.log(window.location.href.split("/")[2]);
 console.log(e.srcElement.value);
 setSessionState(e.srcElement.value);
 states.submit();
