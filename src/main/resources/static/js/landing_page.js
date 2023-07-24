@@ -54,7 +54,8 @@ async function clicked(postId, userId, e) {
 
  async function setSessionState(stateId) {
  const url = "http://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
- const json = await this.getSessionState(url);
+ console.log(url);
+// const json = await this.getSessionState(url);
  }
 
  async function getSessionState(url, stateId) {

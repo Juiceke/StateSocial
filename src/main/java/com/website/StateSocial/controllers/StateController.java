@@ -210,8 +210,8 @@ public class StateController {
     public String landingPage(Model model, HttpServletRequest request, @ModelAttribute State state) {
 
 
-        request.getSession(false).setAttribute("states", stateService.getAllStates());
-        System.out.println(request.getSession().getAttribute("states"));
+//        request.getSession(false).setAttribute("states", stateService.getAllStates());
+//        System.out.println(request.getSession().getAttribute("states"));
 
         model.addAttribute("states", stateService.getAllStates());
 
