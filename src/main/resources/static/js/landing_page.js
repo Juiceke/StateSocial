@@ -82,7 +82,8 @@ for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
 console.log(window.location.href.split("/")[2]);
 console.log(e.srcElement.value);
-setSessionState(e.srcElement.value);
+console.log("http://" + window.location.href.split("/")[2] + `/posts?stateId=${e.srcElement.value}`);
+//setSessionState(e.srcElement.value);
 //states.submit();
 })
 }
