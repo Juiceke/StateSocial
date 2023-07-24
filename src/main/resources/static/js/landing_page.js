@@ -48,12 +48,12 @@ async function getJSON(url, e) {
 
 async function clicked(postId, userId, e) {
  // get info from backend
- const url = "http://" + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
+ const url = "https://" + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);
  }
 
  async function setSessionState(stateId) {
- const url = "http://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
+ const url = "https://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
  console.log(url);
  const json = await this.getSessionState(url);
  }
