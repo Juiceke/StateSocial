@@ -55,7 +55,7 @@ async function clicked(postId, userId, e) {
  async function setSessionState(stateId) {
  const url = "http://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
  console.log(url);
-// const json = await this.getSessionState(url);
+ const json = await this.getSessionState(url);
  }
 
  async function getSessionState(url, stateId) {
@@ -82,9 +82,9 @@ for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
 console.log(window.location.href.split("/")[2]);
 console.log(e.srcElement.value);
-console.log("http://" + window.location.href.split("/")[2] + `/posts?stateId=${e.srcElement.value}`);
-//setSessionState(e.srcElement.value);
-//states.submit();
+//console.log("http://" + window.location.href.split("/")[2] + `/posts?stateId=${e.srcElement.value}`);
+setSessionState(e.srcElement.value);
+states.submit();
 })
 }
 
