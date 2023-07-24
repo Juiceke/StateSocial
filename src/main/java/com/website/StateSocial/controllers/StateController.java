@@ -53,7 +53,7 @@ public class StateController {
         model.addAttribute("states", stateService.getAllStates());
         User sessionUser = new User();
 
-        if (request.getSession(false) != null) {
+        if (request.getSession(false).getAttribute("SESSION_USER") != null) {
             sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
 //            System.out.println(request.getSession().getAttribute("SESSION_USER"));
             model.addAttribute("loggedIn", sessionUser.isLoggedIn());
@@ -127,13 +127,26 @@ public class StateController {
         }
     }
 
-    @PostMapping("/posts")
+//    @PostMapping("/posts")
+//    public void sessionState(Model model, @ModelAttribute State state, HttpServletRequest request) {
+////        model.addAttribute("states", stateService.getAllStates());
+//        State sessionState = new State();
+//        sessionState = (State) request.getSession().getAttribute("SESSION_STATE");
+//        request.getSession().setAttribute("SESSION_STATE", state);
+//        System.out.println(sessionState);
+//    }
+
+    @GetMapping("/posts")
     public String posts(Model model, @ModelAttribute State state, @ModelAttribute Post post, HttpServletRequest request) {
         model.addAttribute("states", stateService.getAllStates());
-        System.out.println(state);
+//        request.getSession().setAttribute("SESSION_STATE", state);
+//        System.out.println(state);
+//        State sessionState = new State();
+        Long sessionState = (Long) request.getSession().getAttribute("SESSION_STATE");
+        System.out.println(sessionState);
         User sessionUser = new User();
 
-        if (request.getSession(false) != null) {
+        if (request.getSession().getAttribute("SESSION_USER") != null) {
             sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
 //            System.out.println(request.getSession().getAttribute("SESSION_USER"));
             model.addAttribute("user", sessionUser);
@@ -147,7 +160,7 @@ public class StateController {
             model.addAttribute("notice", "state selected outside of what was expected. please try again.");
         }
         else {
-            model.addAttribute("posts", stateService.getStateById(state.getStateId()).getPosts());
+            model.addAttribute("posts", stateService.getStateById(sessionState).getPosts());
         }
         return "landing_page";
     }
@@ -195,37 +208,45 @@ public class StateController {
 
     @GetMapping("/")
     public String landingPage(Model model, HttpServletRequest request, @ModelAttribute State state) {
+
+
+        request.getSession(false).setAttribute("states", stateService.getAllStates());
+        System.out.println(request.getSession().getAttribute("states"));
+
         model.addAttribute("states", stateService.getAllStates());
 
         User sessionUser = new User();
 
         if (request.getSession(false) != null) {
-            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
-//            System.out.println(request.getSession().getAttribute("SESSION_USER"));
+            System.out.println("what");
+//            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+            System.out.println(request.getSession().getAttribute("SESSION_USER"));
             model.addAttribute("loggedIn", sessionUser.isLoggedIn());
         } else {
             model.addAttribute("loggedIn", false);
         }
 
-        model.addAttribute("loggedIn", sessionUser.isLoggedIn());
+//        model.addAttribute("loggedIn", sessionUser.isLoggedIn());
         return "landing_page";
     }
 
     @GetMapping("/login")
     public String loginPage(Model model, HttpServletRequest request) {
-        if (request.getSession(false) != null) {
-            return "redirect:/";
+        if (request.getSession().getAttribute("SESSION_USER") == null) {
+            // obtain cookie now
+            request.getSession();
+            model.addAttribute("user", new User());
+            return "login_page";
         }
-//        obtain cookie now
-        request.getSession();
-        model.addAttribute("user", new User());
-        return "login_page";
+
+        return "redirect:/";
     }
 
     @GetMapping("/users/logout")
     public String logout(HttpServletRequest request) {
         if (request.getSession(false) != null) {
             request.getSession().invalidate();
+            request.removeAttribute("SESSION_USER");
         }
         return "redirect:/login";
     }

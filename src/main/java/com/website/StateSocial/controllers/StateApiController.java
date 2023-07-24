@@ -35,6 +35,16 @@ public class StateApiController {
         this.stateService = stateService;
     }
 
+    @PostMapping("/posts")
+    public void sessionState(Model model, @RequestParam Long stateId, HttpServletRequest request) {
+//        model.addAttribute("states", stateService.getAllStates());
+//        Long sessionState = new Long();
+        request.getSession().setAttribute("SESSION_STATE", stateId);
+        Long sessionState = (Long) request.getSession().getAttribute("SESSION_STATE");
+
+        System.out.println(sessionState);
+    }
+
     @GetMapping("/states/api")
     public List<State> getStates() {
         return stateService.getAllStates();
@@ -49,7 +59,7 @@ public class StateApiController {
     public User getSessionUser(Model model, HttpServletRequest request) {
         User sessionUser = new User();
         sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
-       return stateService.getUserById(sessionUser.getVisitorId());
+        return stateService.getUserById(sessionUser.getVisitorId());
     }
 
 //    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, headers = {})

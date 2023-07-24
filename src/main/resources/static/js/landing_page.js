@@ -52,9 +52,35 @@ async function clicked(postId, userId, e) {
  const json = await this.getJSON(url, e);
  }
 
+ async function setSessionState(stateId) {
+ const url = `http://localhost:8080/posts?stateId=${stateId}`;
+ const json = await this.getSessionState(url);
+ }
+
+ async function getSessionState(url, stateId) {
+     return await fetch(url, {
+                method: "POST",
+                headers: {
+                "Content-Type": 'application/x-www-form-urlencoded'
+                },
+             }).then((response) => {
+             console.log(response);
+             return response})
+             .then((data) => {
+//             const pageLikes = e.target.form.childNodes[9].childNodes[1].innerHTML;
+             console.log(data);
+//             if(data.likeamnt > pageLikes) {
+//                 e.target.form.childNodes[9].childNodes[1].innerHTML++
+//             } else if (data.likeamnt < pageLikes && data.postBody) {
+//                 e.target.form.childNodes[9].childNodes[1].innerHTML--
+//             }
+             return data});
+ }
+
 for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
-console.log(e);
+console.log(e.srcElement.value);
+setSessionState(e.srcElement.value);
 states.submit();
 })
 }

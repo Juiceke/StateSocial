@@ -12,7 +12,7 @@
 <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
-        <form th:action="@{/posts}" method="POST" id="submit">
+        <form th:action="@{/posts}" method="GET" id="submit">
             <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
                 <option value="1">Select state</option>
                 <option th:each="state: ${states}"
