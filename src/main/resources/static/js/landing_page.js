@@ -48,15 +48,15 @@ async function getJSON(url, e) {
 
 async function clicked(postId, userId, e) {
  // get info from backend
- const url = "https://" + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
+ const url = `${window.location.href.split("/")[0]}//` + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);
  }
 
- async function setSessionState(stateId) {
- const url = "https://" + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
- console.log(url);
- const json = await this.getSessionState(url);
- }
+// async function setSessionState(stateId) {
+// const url = `${window.location.href.split("/")[0]}//` + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
+// console.log(url);
+// const json = await this.getSessionState(url);
+// }
 
  async function getSessionState(url, stateId) {
      return await fetch(url, {
@@ -78,15 +78,25 @@ async function clicked(postId, userId, e) {
              return data});
  }
 
+//window.addEventListener("DOMContentLoaded", (e) => {
+//console.log("maybe");
+//if(window.location.href.split("=")[1] != null) {
+//setSessionState(window.location.href.split("=")[1])
+//} else {
+//console.log("no?");
+//}
+//})
+
 for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
 console.log(window.location.href.split("/")[2]);
 console.log(e.srcElement.value);
 //console.log("http://" + window.location.href.split("/")[2] + `/posts?stateId=${e.srcElement.value}`);
-setSessionState(e.srcElement.value);
+//setSessionState(e.srcElement.value);
 states.submit();
 })
 }
+
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {

@@ -96,7 +96,11 @@ public class StateController {
     @PostMapping("/posts/api")
     public String createPost(@ModelAttribute Post postRequest, @ModelAttribute User userRequest,
                              @ModelAttribute State stateRequest, HttpServletRequest request,
-                             Model model) {
+                             @RequestParam Long stateId, Model model) {
+
+//        request.getSession().setAttribute("SESSION_STATE", stateId);
+//        Long sessionState = (Long) request.getSession().getAttribute("SESSION_STATE");
+//        System.out.println(sessionState);
 
 //        get user session
         User sessionUser = new User();
@@ -137,10 +141,11 @@ public class StateController {
 //    }
 
     @GetMapping("/posts")
-    public String posts(Model model, @ModelAttribute State state, @ModelAttribute Post post, HttpServletRequest request) {
+    public String posts(Model model, @ModelAttribute State state, @ModelAttribute Post post, HttpServletRequest request,
+                        @RequestParam Long stateId) {
         model.addAttribute("states", stateService.getAllStates());
-//        request.getSession().setAttribute("SESSION_STATE", state);
-//        System.out.println(state);
+        request.getSession().setAttribute("SESSION_STATE", stateId);
+        System.out.println(stateId);
 //        State sessionState = new State();
         Long sessionState = (Long) request.getSession().getAttribute("SESSION_STATE");
         System.out.println(sessionState);
@@ -156,7 +161,7 @@ public class StateController {
         }
 
         model.addAttribute("loggedIn", sessionUser.isLoggedIn());
-        if(state.getStateId() > 50 || state.getStateId() < 0) {
+        if(sessionState > 50 || sessionState < 0) {
             model.addAttribute("notice", "state selected outside of what was expected. please try again.");
         }
         else {
@@ -208,10 +213,14 @@ public class StateController {
 
     @GetMapping("/")
     public String landingPage(Model model, HttpServletRequest request, @ModelAttribute State state) {
+        Long baseNumber = 1L;
 
+        System.out.println(baseNumber);
+
+        request.getSession().setAttribute("SESSION_STATE", 1L);
 
 //        request.getSession(false).setAttribute("states", stateService.getAllStates());
-//        System.out.println(request.getSession().getAttribute("states"));
+        System.out.println(request.getSession().getAttribute("SESSION_STATE"));
 
         model.addAttribute("states", stateService.getAllStates());
 

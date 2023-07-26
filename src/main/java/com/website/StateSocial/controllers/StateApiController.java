@@ -37,7 +37,7 @@ public class StateApiController {
 
     @PostMapping("/posts")
     public void sessionState(Model model, @RequestParam Long stateId, HttpServletRequest request) {
-//        model.addAttribute("states", stateService.getAllStates());
+        model.addAttribute("states", stateService.getAllStates());
 //        Long sessionState = new Long();
         request.getSession().setAttribute("SESSION_STATE", stateId);
         Long sessionState = (Long) request.getSession().getAttribute("SESSION_STATE");
