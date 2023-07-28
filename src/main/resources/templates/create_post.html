@@ -12,15 +12,6 @@
 <div class="header" id="stateHeader">
     <nav>
         <h2><a href="/">STATE SOCIAL</a></h2>
-        <form th:action="@{/posts}" method="GET">
-            <select class="form" id="test" th:field="*{state.stateId}"name="stateSelect">
-                <option value="1">Select state</option>
-                <option th:each="state: ${states}"
-                        th:value="${state.stateId}"
-                        th:text="${state.stateName}"></option>
-            </select>
-            <button type="submit">Submit</button>
-        </form>
     </nav>
     <div th:if="${loggedIn}">
         <a th:href="@{/users/logout}" class="btn">logout</a>
@@ -42,7 +33,7 @@
                           th:field="${post.postTitle}" name="postTitle"></textarea>
                 <div>Characters left: <span id="title_num">255</span></div>
             </div>
-            <div>
+            <div id="body">
                 <textarea maxlength="4000" class="card-text body_sign" id="body_sign" placeholder="please insert post here!"
                           th:field="${post.postBody}" name="postBody"></textarea>
                 <div>Characters left: <span id="body_num">4000</span></div>

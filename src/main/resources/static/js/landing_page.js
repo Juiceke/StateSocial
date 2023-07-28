@@ -52,47 +52,8 @@ async function clicked(postId, userId, e) {
  const json = await this.getJSON(url, e);
  }
 
-// async function setSessionState(stateId) {
-// const url = `${window.location.href.split("/")[0]}//` + window.location.href.split("/")[2] + `/posts?stateId=${stateId}`;
-// console.log(url);
-// const json = await this.getSessionState(url);
-// }
-
- async function getSessionState(url, stateId) {
-     return await fetch(url, {
-                method: "POST",
-                headers: {
-                "Content-Type": 'application/x-www-form-urlencoded'
-                },
-             }).then((response) => {
-             console.log(response);
-             return response})
-             .then((data) => {
-//             const pageLikes = e.target.form.childNodes[9].childNodes[1].innerHTML;
-             console.log(data);
-//             if(data.likeamnt > pageLikes) {
-//                 e.target.form.childNodes[9].childNodes[1].innerHTML++
-//             } else if (data.likeamnt < pageLikes && data.postBody) {
-//                 e.target.form.childNodes[9].childNodes[1].innerHTML--
-//             }
-             return data});
- }
-
-//window.addEventListener("DOMContentLoaded", (e) => {
-//console.log("maybe");
-//if(window.location.href.split("=")[1] != null) {
-//setSessionState(window.location.href.split("=")[1])
-//} else {
-//console.log("no?");
-//}
-//})
-
 for(i=0; i < states.length; i++) {
 states.addEventListener("change", (e) => {
-console.log(window.location.href.split("/")[2]);
-console.log(e.srcElement.value);
-//console.log("http://" + window.location.href.split("/")[2] + `/posts?stateId=${e.srcElement.value}`);
-//setSessionState(e.srcElement.value);
 states.submit();
 })
 }

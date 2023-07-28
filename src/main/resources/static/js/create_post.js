@@ -1,31 +1,47 @@
 const title = document.getElementById("title_sign");
 let title_num = document.getElementById("title_num");
+let body = document.getElementById("body_sign");
+let body_num = document.getElementById("body_num");
 console.log(title);
 
 title.addEventListener("paste", (e) => {
-if(title_num.textContent == 0
-|| title_num.textContent - (e.clipboardData.getData("Text").length + 1) < 0) {
-title_num.textContent = 0;
-} else {
-title_num.textContent -= (e.clipboardData.getData("Text").length - 1);
-console.log(title_num);
-}
-console.log(e.clipboardData.getData("Text").length);
+charactersLeftPaste(e, title_num)
 })
 
 title.addEventListener("input", (e) => {
-if(title_num.textContent == 0) {
+charactersLeftInpt(e, title_num, title, title.maxLength)
+})
+
+body.addEventListener("paste", (e) => {
+charactersLeftPaste(e, body_num)
+})
+
+body.addEventListener("input", (e) => {
+charactersLeftInpt(e, body_num, body, body.maxLength)
+})
+
+
+
+function charactersLeftInpt(e, num, characters, max) {
+if(num.textContent == 0) {
 let difference = 0;
-difference = 255 - title.textLength;
-title_num.textContent = difference;
+difference = max - characters.textLength;
+num.textContent = difference;
 } else if(e.inputType == "deleteContentBackward") {
 let difference = 0;
-difference = 255 - title.textLength;
-title_num.textContent = difference;
+difference = max - characters.textLength;
+num.textContent = difference;
 } else {
-title_num.textContent--;
-//console.log(e);
+console.log(title.maxLength)
+num.textContent--;
+}
 }
 
-//title_num
-})
+function charactersLeftPaste(e, num) {
+if(num.textContent == 0 || num.textContent - (e.clipboardData.getData("Text").length + 1) < 0) {
+num.textContent = 0;
+} else {
+num.textContent -= (e.clipboardData.getData("Text").length - 1);
+console.log(num);
+}
+}
