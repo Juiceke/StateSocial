@@ -223,13 +223,16 @@ public class StateController {
         System.out.println(request.getSession().getAttribute("SESSION_STATE"));
 
         model.addAttribute("states", stateService.getAllStates());
+        model.addAttribute("posts", stateService.getAllPosts());
 
         User sessionUser = new User();
 
-        if (request.getSession(false) != null) {
+        if (request.getSession().getAttribute("SESSION_USER") != null) {
             System.out.println("what");
 //            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
             System.out.println(request.getSession().getAttribute("SESSION_USER"));
+            sessionUser = (User) request.getSession().getAttribute("SESSION_USER");
+            model.addAttribute("user", sessionUser);
             model.addAttribute("loggedIn", sessionUser.isLoggedIn());
         } else {
             model.addAttribute("loggedIn", false);

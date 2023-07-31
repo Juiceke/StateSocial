@@ -26,7 +26,7 @@
     </div>
     <div th:if="${loggedIn}">
     <a class="" th:href="@{/users/logout}">logout</a>
-</div>
+    </div>
     <div th:unless="${loggedIn}">
         <a th:href="@{/login}">login</a>
     </div>
@@ -35,23 +35,34 @@
 <div th:if="${notice}" class="flash-message">
     <h3>[[${notice}]]</h3>
 </div>
-<div class="content post-group" id="pageContent" th:if="${posts}" >
+<div class="content post-group" id="pageContent" th:if="${posts!=null and !posts.empty}" >
     <form method="POST" class="post" th:each="post: ${posts}" th:action="@{/posts/like}">
 <!--    <div class="post">-->
         <div class="post_title" th:text="${post.postTitle}"></div>
         <div class="post_body" th:text="${post.postBody}"></div>
         <div class="post_user" th:text="${post.visitorName}"></div>
-        <div>likes <span class="likes" th:text="${post.likeamnt}"></span></div>
-        <div th:if="${loggedIn}">
-            <input type="hidden" th:value="${post.postId}" class="postId" name="postId">
-            <input type="hidden" th:field="${user.visitorId}" name="visitorId" class="visitorId">
-            <input type="button" class="btn">smile</input>
+
+        <div class="left">likes <span class="likes" th:text="${post.likeamnt}"></span></div>
+        <div class="opposite_sides">
+            <div th:if="${loggedIn}">
+                <input type="hidden" th:value="${post.postId}" class="postId" name="postId">
+                <input type="hidden" th:field="${user.visitorId}" name="visitorId" class="visitorId">
+                <input type="button" class="btn">smile</input>
+            </div>
+            <a th:href="@{/posts(stateId=${post.state.stateId})}">
+                <div class="right" th:text="${post.state.stateName}"></div>
+            </a>
         </div>
 <!--    </div>-->
     </form>
-
 </div>
-
+<div class="content" id="noContent" th:if="${posts?.empty}">
+    <div class="post">
+        <div class="empty">
+            <p>No reviews in this state!</p>
+        </div>
+    </div>
+</div>
 </body>
 <script src="/js/landing_page.js"></script>
 <!--<script src="../static/js/landing_page.js"></script>-->
