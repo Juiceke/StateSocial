@@ -7,6 +7,8 @@ const test = document.getElementById("test");
 
 console.log(states);
 
+window.onload = function() {stickyHeader()};
+
 window.onscroll = function() {stickyHeader()};
 
 const sticky = header.offsetTop
@@ -35,13 +37,13 @@ async function getJSON(url, e) {
                },
             }).then((response) => response.json())
             .then((data) => {
-            const pageLikes = e.target.form.childNodes[9].childNodes[1].innerHTML;
+            const pageLikes = e.target.form.childNodes[9].childNodes[1].childNodes[1];
             console.log(data);
-            console.log(e)
-            if(data.likeamnt > pageLikes) {
-                e.target.form.childNodes[9].childNodes[1].innerHTML++
-            } else if (data.likeamnt < pageLikes && data.postBody) {
-                e.target.form.childNodes[9].childNodes[1].innerHTML--
+            console.log(pageLikes.innerHTML);
+            if(data.likeamnt > pageLikes.innerHTML) {
+               pageLikes.innerHTML++
+            } else if (data.likeamnt < pageLikes.innerHTML && data.postBody) {
+                pageLikes.innerHTML--
             }
             return data});
 }
