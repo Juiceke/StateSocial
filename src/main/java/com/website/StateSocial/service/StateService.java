@@ -5,7 +5,6 @@ import com.website.StateSocial.entity.State;
 import com.website.StateSocial.entity.User;
 
 import java.util.List;
-import java.util.StringTokenizer;
 
 public interface StateService {
     List<State> getAllStates();
@@ -23,6 +22,8 @@ public interface StateService {
     User getUserById(Long visitor_id);
 
     List<User> getAllUsers();
+
+    List<Post> findBystateName(String state, int amount);
 
 //    List<Post> getAllPostsByState(Long state_id);
 

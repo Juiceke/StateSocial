@@ -25,5 +25,8 @@ var scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? documen
 var scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
     if(scrollTop + window.innerHeight == getDocHeight()) {
             console.log("bottom! Normal!");
+            const newDiv = document.createElement("div");
+            newDiv.setAttribute("value", "[[${post.postId}]]");
+            document.getElementById("1").append(newDiv);
         }
  }

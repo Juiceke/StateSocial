@@ -61,7 +61,6 @@ states.submit();
 })
 }
 
-
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
     posts[i].addEventListener("click", (e) => {
     postId = e.target.form[0].value;

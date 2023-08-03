@@ -10,7 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
-<div id="page">
     <div class="header" id="stateHeader">
     <nav>
         <h2>HEAD</h2>
@@ -38,7 +37,7 @@
     <h3>[[${notice}]]</h3>
 </div>
 <div class="content post-group" id="pageContent" th:if="${posts!=null and !posts.empty}" >
-    <form method="POST" class="post" th:each="post: ${posts}" th:action="@{/posts/like}">
+    <form method="POST" class="post" th:each="post, iStat : ${posts}" th:if="${iStat.index < 4}"th:action="@{/posts/like}">
 <!--    <div class="post">-->
         <div class="post_title" th:text="${post.postTitle}"></div>
         <div class="post_body" th:text="${post.postBody}"></div>
@@ -46,11 +45,11 @@
         <div class="opposite_sides">
         <div class="left">likes <span class="likes" th:text="${post.likeamnt}"></span></div>
         <a th:unless="${loggedIn}" th:href="@{/posts(stateId=${post.state.stateId})}">
-            <div class="right" th:text="${post.state.stateName}"></div>
+            <div class="right" th:id="${post.postId}" th:text="${post.state.stateName}"></div>
         </a>
         </div>
-        <div class="opposite_sides">
-            <div th:if="${loggedIn}">
+        <div th:if="${loggedIn}" class="opposite_sides">
+            <div>
                 <input type="hidden" th:value="${post.postId}" class="postId" name="postId">
                 <input type="hidden" th:field="${user.visitorId}" name="visitorId" class="visitorId">
                 <input type="button" class="btn" value="smile"/>
@@ -69,9 +68,29 @@
         </div>
     </div>
 </div>
-</div>
 </body>
 <script src="/js/landing_page.js"></script>
 <script src="/js/scroll.js"></script>
+<script th:inline="javascript">
+
+    window.onscroll = function () {
+var supportPageOffset = window.pageXOffset !== undefined;
+var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+
+var scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+var scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+const list = [[${posts}]];
+
+
+    if(scrollTop + window.innerHeight == getDocHeight()) {
+            console.log("bottom! Normal!");
+
+            for(i=document.getElementsByClassName("post").length; i < document.getElementsByClassName("post").length + 4; i++) {
+                <!--       make backend route that will give more content as needed      -->
+                console.log(list[i].stateName)
+            }
+        }
+ }
+</script>
 <!--<script src="../static/js/landing_page.js"></script>-->
 </html>

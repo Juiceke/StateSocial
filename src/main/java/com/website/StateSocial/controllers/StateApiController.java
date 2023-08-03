@@ -62,6 +62,11 @@ public class StateApiController {
         return stateService.getUserById(sessionUser.getVisitorId());
     }
 
+    @GetMapping("/test")
+    public List<Post> getPostsByStateName() {
+        return stateService.findBystateName("Alabama");
+    }
+
 //    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, headers = {})
 //    public @ResponseBody void likePost(@RequestParam Long postId, @RequestParam Long visitorId, @ModelAttribute State state,
 //                                       HttpServletRequest request){

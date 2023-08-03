@@ -9,8 +9,8 @@ import com.website.StateSocial.repository.UserRepository;
 import com.website.StateSocial.service.StateService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 @Service
 public class StateServiceImpl implements StateService {
@@ -68,6 +68,22 @@ public class StateServiceImpl implements StateService {
         return userRepository.findAll();
     }
 
+    @Override
+    public List<Post> findBystateName(String state,int amount) {
+        List<Post> posts = new ArrayList<>();
+
+        List<Post> postsNeeded = postRepository.findBystateName(state);
+
+
+        for(int i = amount; i < amount + 10; i++) {
+            try {
+                posts.add(postsNeeded.get(i));
+            } catch (IndexOutOfBoundsException e) {
+                break;
+            }
+        }
+        return posts;
+    }
 
 
 //    @Override
