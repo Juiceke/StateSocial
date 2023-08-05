@@ -33,8 +33,12 @@ public class Post implements Serializable {
     @JsonView(View.Public.class)
     private String stateName;
 
+    private Long statesId;
+
     @JsonView(View.Public.class)
     private String visitorName;
+
+
 
 //    @JsonView(View.Internal.class)
 //    private Long stateId;
@@ -207,7 +211,13 @@ public class Post implements Serializable {
         this.userLiked = userLiked;
     }
 
+    public Long getStatesId() {
+        return statesId;
+    }
 
+    public void setStatesId(Long statesId) {
+        this.statesId = statesId;
+    }
 
     @Override
     public boolean equals(Object o) {

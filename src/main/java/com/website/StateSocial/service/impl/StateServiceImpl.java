@@ -73,10 +73,13 @@ public class StateServiceImpl implements StateService {
         List<Post> posts = new ArrayList<>();
 
         List<Post> postsNeeded = postRepository.findBystateName(state);
+        int amountNeeded = amount + 3;
 
 
-        for(int i = amount; i < amount + 10; i++) {
+        for(int i = amount; i < amountNeeded; i++) {
             try {
+                System.out.println(i);
+                System.out.println(amountNeeded);
                 posts.add(postsNeeded.get(i));
             } catch (IndexOutOfBoundsException e) {
                 break;

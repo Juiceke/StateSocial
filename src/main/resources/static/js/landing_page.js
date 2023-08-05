@@ -2,7 +2,7 @@ const state = document.getElementById("test");
 const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
 const states = document.getElementById("submit")
-const posts = document.getElementsByClassName("btn");
+const posts = document.getElementsByClassName("post");
 const test = document.getElementById("test");
 
 console.log(states);
@@ -62,6 +62,7 @@ states.submit();
 }
 
  for(i=0; i < document.getElementsByClassName("post").length; i++) {
+    posts[i].classList.add("inserted");
     posts[i].addEventListener("click", (e) => {
     postId = e.target.form[0].value;
     userId = e.target.form[1].value;

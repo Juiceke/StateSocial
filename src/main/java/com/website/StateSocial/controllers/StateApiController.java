@@ -62,9 +62,10 @@ public class StateApiController {
         return stateService.getUserById(sessionUser.getVisitorId());
     }
 
-    @GetMapping("/test")
-    public List<Post> getPostsByStateName() {
-        return stateService.findBystateName("Alabama");
+    @GetMapping("/getPostsAsNeeded")
+    public List<Post> getPostsByStateName(@RequestParam String state, @RequestParam int amount, Model model) {
+        System.out.println(state);
+        return stateService.findBystateName(state, amount);
     }
 
 //    @PostMapping(value = "/posts/like", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, headers = {})

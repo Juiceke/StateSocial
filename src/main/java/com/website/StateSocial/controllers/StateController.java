@@ -112,6 +112,7 @@ public class StateController {
             User user = stateService.getUserById(userRequest.getVisitorId());
 
             postRequest.setStateName(state.getStateName());
+            postRequest.setStatesId(state.getStateId());
             postRequest.setState(state);
             postRequest.setVisitorName(user.getUserName());
             postRequest.setUserPosted(user);
@@ -165,7 +166,7 @@ public class StateController {
             model.addAttribute("notice", "state selected outside of what was expected. please try again.");
         }
         else {
-            model.addAttribute("posts", stateService.getStateById(sessionState).getPosts());
+            model.addAttribute("posts", stateService.findBystateName(stateService.getStateById(sessionState).getStateName(), 0));
         }
         return "landing_page";
     }
