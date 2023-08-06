@@ -119,10 +119,12 @@ public class StateController {
 
             if(postRequest.getPostTitle().length() > 255
                || postRequest.getPostBody().length() > 4000) {
+                System.out.println("important " + postRequest.getPostTitle().length());
                 model.addAttribute("notice",
                         "Content longer than it should be!");
                 return "create_post";
             }
+            System.out.println("important " + postRequest.getPostTitle().length());
 
             stateService.savePost(postRequest);
             return "redirect:/";

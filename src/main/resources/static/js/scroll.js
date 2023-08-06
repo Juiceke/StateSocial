@@ -19,7 +19,9 @@ async function getJSONPosts(url) {
         }).then((response) => response.json())
         .then((data) => {
         console.log(data);
-        addJSON(data);
+        for(i = 0; i < data.length; i++) {
+        addJSON(i, data);
+        }
             return data});
 }
 
@@ -34,7 +36,7 @@ async function setAttributes(el, attrs) {
         );
 }
 
-async function addJSON(data) {
+async function addJSON(i, data) {
 const newForm = document.createElement("form");
 setAttributes(newForm, {
     method: "POST",
@@ -49,17 +51,17 @@ const newUser = document.createElement("div");
 
 setAttributes(newTitle, {
     className: "post_title",
-    innerHTML: data[0].postTitle
+    innerHTML: data[i].postTitle
 })
 
 setAttributes(newBody, {
     className: "post_body",
-    innerHTML: data[0].postBody
+    innerHTML: data[i].postBody
 })
 
 setAttributes(newUser, {
     className: "post_user",
-    innerHTML: data[0].visitorName
+    innerHTML: data[i].visitorName
 })
 
 newForm.append(newTitle);
@@ -79,7 +81,7 @@ const aWrap = document.createElement("a");
 
 setAttributes(likeSpan, {
     className: "likes",
-    innerHTML: data[0].likeamnt
+    innerHTML: data[i].likeamnt
 })
 
 setAttributes(leftDiv, {
@@ -88,7 +90,7 @@ setAttributes(leftDiv, {
 })
 
 setAttributes(aWrap, {
-    href: "/posts?stateId=" + data[0].statesId,
+    href: "/posts?stateId=" + data[i].statesId,
     className: "stateName"
 })
 
@@ -96,7 +98,7 @@ setAttributes(aWrap, {
 
 setAttributes(rightDiv, {
     className:"bottom right",
-    innerHTML: data[0].stateName
+    innerHTML: data[i].stateName
 })
 
 if(logged.text == "logout") {
@@ -107,7 +109,7 @@ const btn = document.createElement("input");
 
 setAttributes(postId, {
     type: "hidden",
-    value: data[0].postId,
+    value: data[i].postId,
     className: "postId",
     id: "postId",
     name: "postId"
@@ -115,7 +117,7 @@ setAttributes(postId, {
 
 setAttributes(visitorId, {
     type: "hidden",
-    value: data[0].userPosted.visitorId,
+    value: data[i].userPosted.visitorId,
     className: "visitorId",
     id: "visitorId",
     name: "postId"
@@ -180,24 +182,27 @@ var scrollTop = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document
     if(scrollTop + window.innerHeight == getDocHeight()) {
 
         console.log("bottom! Normal!");
+
         const selectedState = event.target.children[0].children[1].children[0].children[0].children[1][0];
+
         const selectedStateName = selectedState[selectedState.options.selectedIndex].text
         console.log(selectedState[selectedState.options.selectedIndex].text)
+
         const amount = posts.length;
         const url = `${window.location.href.split("/")[0]}//` + window.location.href.split("/")[2]+ `/getPostsAsNeeded?state=${selectedStateName}&amount=${amount}`
         console.log(url);
         getJSONPosts(url);
         for(i=0; i < document.getElementsByClassName("post").length; i++) {
             if(document.getElementsByClassName("post")[i].classList.contains("inserted")) {
+
             } else {
-            posts[i].classList.add("inserted");
-            posts[i].addEventListener("click", (e) => {
-            postId = e.target.form[0].value;
-            userId = e.target.form[1].value;
-            clicked(postId, userId, e);
-            })
+                posts[i].classList.add("inserted");
+                posts[i].addEventListener("click", (e) => {
+                postId = e.target.form[0].value;
+                userId = e.target.form[1].value;
+                clicked(postId, userId, e);
+                })
             }
-//            document.getElementById("1").append(newDiv);
         }
  }
  }

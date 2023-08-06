@@ -3,6 +3,7 @@ const page = document.getElementById("pageContent");
 const header = document.getElementById("stateHeader");
 const states = document.getElementById("submit")
 const posts = document.getElementsByClassName("post");
+const likeAmnts = document.getElementsByClassName("likes");
 const test = document.getElementById("test");
 
 console.log(states);
@@ -37,9 +38,15 @@ async function getJSON(url, e) {
                },
             }).then((response) => response.json())
             .then((data) => {
-            const pageLikes = e.target.form.childNodes[9].childNodes[1].childNodes[1];
             console.log(data);
-            console.log(pageLikes.innerHTML);
+
+            console.log(posts);
+
+            console.log(e.target.form.children[3].childNodes[1].innerHTML);
+
+            const pageLikes = e.target.form.children[3].childNodes[1];
+
+
             if(data.likeamnt > pageLikes.innerHTML) {
                pageLikes.innerHTML++
             } else if (data.likeamnt < pageLikes.innerHTML && data.postBody) {
@@ -50,6 +57,7 @@ async function getJSON(url, e) {
 
 
 async function clicked(postId, userId, e) {
+
  // get info from backend
  const url = `${window.location.href.split("/")[0]}//` + window.location.href.split("/")[2] + `/posts/like?postId=${postId}&visitorId=${userId}`;
  const json = await this.getJSON(url, e);

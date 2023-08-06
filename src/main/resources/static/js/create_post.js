@@ -25,11 +25,12 @@ charactersLeftInpt(e, body_num, body, body.maxLength)
 function charactersLeftInpt(e, num, characters, max) {
 if(num.textContent == 0) {
 let difference = 0;
-difference = max - characters.textLength;
+difference = max - characters.textContent.length;
 num.textContent = difference;
 } else if(e.inputType == "deleteContentBackward") {
 let difference = 0;
-difference = max - characters.textLength;
+console.log("ehy " + characters.textContent.length);
+difference = max - characters.textContent.length;
 num.textContent = difference;
 } else {
 console.log(title.maxLength)
