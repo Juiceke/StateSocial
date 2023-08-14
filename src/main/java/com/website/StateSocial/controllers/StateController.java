@@ -110,6 +110,12 @@ public class StateController {
 //            create the post
             State state = stateService.getStateById(stateRequest.getStateId());
             User user = stateService.getUserById(userRequest.getVisitorId());
+            System.out.println("og = " + postRequest.getPostTitle());
+            System.out.println("escaped = " + postRequest.getPostTitle().replaceAll("\\r", ""));
+
+            postRequest.setPostTitle(postRequest.getPostTitle().replaceAll("\\r\\n", "\n"));
+
+            postRequest.setPostBody(postRequest.getPostBody().replaceAll("\\r\\n", "\n"));
 
             postRequest.setStateName(state.getStateName());
             postRequest.setStatesId(state.getStateId());
@@ -117,14 +123,13 @@ public class StateController {
             postRequest.setVisitorName(user.getUserName());
             postRequest.setUserPosted(user);
 
-            if(postRequest.getPostTitle().length() > 255
+            if(postRequest.getPostTitle().replaceAll("\\r", "").length() > 255
                || postRequest.getPostBody().length() > 4000) {
                 System.out.println("important " + postRequest.getPostTitle().length());
                 model.addAttribute("notice",
                         "Content longer than it should be!");
                 return "create_post";
             }
-            System.out.println("important " + postRequest.getPostTitle().length());
 
             stateService.savePost(postRequest);
             return "redirect:/";

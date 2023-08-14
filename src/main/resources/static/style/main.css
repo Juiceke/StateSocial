@@ -1,5 +1,6 @@
-body {
+body, html {
 background: #659DBD;
+height: 100%;
 }
 
 .container {
@@ -84,6 +85,13 @@ font-weight: bold;
 .post_title {
 font-size: 25px;
 border-bottom: .5px solid;
+white-space:pre-wrap;
+overflow-wrap: break-word;
+}
+
+.post_body {
+white-space:pre-wrap;
+overflow-wrap: break-word;
 }
 
 .flash-message {

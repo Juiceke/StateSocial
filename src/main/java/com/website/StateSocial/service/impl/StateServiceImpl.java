@@ -73,7 +73,7 @@ public class StateServiceImpl implements StateService {
         List<Post> posts = new ArrayList<>();
 
         List<Post> postsNeeded = postRepository.findBystateName(state);
-        int amountNeeded = amount + 3;
+        int amountNeeded = amount + 10;
 
 
         for(int i = amount; i < amountNeeded; i++) {
