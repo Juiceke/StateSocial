@@ -11,7 +11,7 @@
 <body>
 <div class="header" id="stateHeader">
     <nav>
-        <h2><a href="/">STATE SOCIAL</a></h2>
+        <h2><a href="/">SOCIAL STATES</a></h2>
     </nav>
     <div th:if="${loggedIn}">
         <a th:href="@{/users/logout}" class="btn">logout</a>
@@ -34,6 +34,7 @@
                         th:text="${state.stateName}"></option>
             </select>
         </form>
+        <img alt="map of the United States" src="/assets/map/map.eps">
     </div>
 </div>
 

@@ -100,4 +100,18 @@ overflow-wrap: break-word;
   text-align: center;
 }
 
+.map {
+    width: 1300px;
+    height: 1000px;
+
+
+}
+
+.mapDiv {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 
